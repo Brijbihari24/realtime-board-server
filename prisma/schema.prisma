@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  // url      = env("DATABASE_URL")
+}
+
+// model User {
+//   id        String   @id @default(uuid())
+//   name      String
+//   email     String   @unique
+//   createdAt DateTime @default(now())
+//   boards    Board[]  // ek user ke multiple boards ho sakte hain
+// }
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String? //optional
+  provider  String   @default("manual")
+  createdAt DateTime @default(now())
+  boards    Board[]
+}
+
+model Board {
+  id        String   @id @default(uuid())
+  title     String
+  ownerId   String
+  owner     User     @relation(fields: [ownerId], references: [id])
+  content   Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

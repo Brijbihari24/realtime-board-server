@@ -1,10 +1,14 @@
-import dotenv from "dotenv";
+import "dotenv/config";
+
+// configure .env 
+// dotenv.config()
+
+// console.log("process.env.CLIENT_URL ->", process.env.CLIENT_URL);
+// console.log("process.env.DATABASE_URL ->", process.env.DATABASE_URL);
 import { createServer } from "http"
 import { Server } from "socket.io"
 import app from "./app.js"
 
-// configure .env 
-dotenv.config()
 
 // create server 
 const httpServer = createServer(app);
