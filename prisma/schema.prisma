@@ -27,6 +27,8 @@ model User {
   email     String   @unique
   password  String? //optional
   provider  String   @default("manual")
+  googleId  String?  @unique
+  githubId  String?  @unique
   createdAt DateTime @default(now())
   boards    Board[]
 }
