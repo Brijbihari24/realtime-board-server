@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h3>Socket Test</h3>
+    <div id="log"></div>
+
+    <script>
+      const log = (msg) => {
+        document.getElementById("log").innerHTML += `<p>${msg}</p>`;
+      };
+
+      // Yaha apna login se mila hua real JWT token daalo
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4OTU5YWIzNi02NDMwLTQ5YmItYTAxYy1iZGQyZjI5MjY5ZWQiLCJpYXQiOjE3OTAxNjAxNjksImV4cCI6MTc5MDc2NDk2OX0.surHF7Tg_ubJEZv_--9jrmSImfJHK30EOE3PqqkyYac";
+
+      const socket = io("http://localhost:4000", {
+        auth: { token },
+      });
+
+      socket.on("connect", () => {
+        log("Connected: " + socket.id);
+        socket.emit("join-board", "test-board-123");
+      });
+
+      socket.on("connect_error", (err) => {
+        log("Connection error: " + err.message);
+      });
+
+      socket.on("disconnect", () => {
+        log("Disconnected");
+      });
+    </script>
+  </body>
+</html>
