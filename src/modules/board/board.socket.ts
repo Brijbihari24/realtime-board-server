@@ -28,12 +28,21 @@ export const registerBoardSocketHandlers = (io: Server, socket: AuthSocket) => {
         }
 
     })
-    socket.on("doc-update", ({ boardId, update }: { boardId: string; update: Uint8Array }) => {
+    socket.on("doc-update", (payload: { boardId: string, update: Uint8Array }) => {
+        try {
+            const { boardId, update } = payload;
 
-        const doc = getOrCreateDoc(boardId);
-        Y.applyUpdate(doc, new Uint8Array(update))
+            if (!socket.rooms.has(boardId)) return;
 
-        socket.to(boardId).emit("doc-update", update)
+            const doc = getOrCreateDoc(boardId);
+            Y.applyUpdate(doc, new Uint8Array(update))
+
+            socket.to(boardId).emit("doc-update", update)
+        } catch (error) {
+            socket.emit("board-error", { message: "Invalid Update" })
+        }
+
+
     })
     socket.on("leave-board", (boardId: string) => {
         socket.leave(boardId)
