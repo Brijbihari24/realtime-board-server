@@ -1,5 +1,4 @@
 import "dotenv/config";
-
 // configure .env 
 // dotenv.config()
 
@@ -9,6 +8,7 @@ import { createServer } from "http"
 import { Server } from "socket.io"
 import app from "./app.js"
 import { socketAuthMiddleware, type AuthSocket } from "./config/socketAuth.js"
+import { registerBoardSocketHandlers } from "./modules/board/board.socket.js";
 
 
 // create server 
@@ -29,22 +29,17 @@ io.use(socketAuthMiddleware)
 //configure socket io
 io.on("connection", (socket: AuthSocket) => {
     console.log(`New socket connected with socketId: ${socket.id}`);
-
-    socket.on("join-board", (boardId: string) => {
-        socket.join(boardId)
-        console.log(`socket with socketId ${socket.id} joined board with boardId ${boardId}`);
-
-    })
-
-    socket.on("leave-board", (boardId: string) => {
-        socket.leave(boardId)
-    })
-
+    // socket.on("join-board", (boardId: string) => {
+    //     socket.join(boardId)
+    //     console.log(`socket with socketId ${socket.id} joined board with boardId ${boardId}`);
+    // })
+    registerBoardSocketHandlers(io, socket);
+    // socket.on("leave-board", (boardId: string) => {
+    //     socket.leave(boardId)
+    // })
     socket.on("disconnect", () => {
         console.log(`Socket/User with ${socket.userId} disconnected`);
-
     })
-
 })
 
 
