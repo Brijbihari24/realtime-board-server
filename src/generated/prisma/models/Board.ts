@@ -28,6 +28,7 @@ export type BoardMinAggregateOutputType = {
   id: string | null
   title: string | null
   ownerId: string | null
+  yjsState: runtime.Bytes | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -36,6 +37,7 @@ export type BoardMaxAggregateOutputType = {
   id: string | null
   title: string | null
   ownerId: string | null
+  yjsState: runtime.Bytes | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,7 +46,7 @@ export type BoardCountAggregateOutputType = {
   id: number
   title: number
   ownerId: number
-  content: number
+  yjsState: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -55,6 +57,7 @@ export type BoardMinAggregateInputType = {
   id?: true
   title?: true
   ownerId?: true
+  yjsState?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -63,6 +66,7 @@ export type BoardMaxAggregateInputType = {
   id?: true
   title?: true
   ownerId?: true
+  yjsState?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -71,7 +75,7 @@ export type BoardCountAggregateInputType = {
   id?: true
   title?: true
   ownerId?: true
-  content?: true
+  yjsState?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -153,7 +157,7 @@ export type BoardGroupByOutputType = {
   id: string
   title: string
   ownerId: string
-  content: runtime.JsonValue | null
+  yjsState: runtime.Bytes | null
   createdAt: Date
   updatedAt: Date
   _count: BoardCountAggregateOutputType | null
@@ -183,7 +187,7 @@ export type BoardWhereInput = {
   id?: Prisma.StringFilter<"Board"> | string
   title?: Prisma.StringFilter<"Board"> | string
   ownerId?: Prisma.StringFilter<"Board"> | string
-  content?: Prisma.JsonNullableFilter<"Board">
+  yjsState?: Prisma.BytesNullableFilter<"Board"> | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFilter<"Board"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Board"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -193,7 +197,7 @@ export type BoardOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
-  content?: Prisma.SortOrderInput | Prisma.SortOrder
+  yjsState?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
@@ -206,7 +210,7 @@ export type BoardWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BoardWhereInput | Prisma.BoardWhereInput[]
   title?: Prisma.StringFilter<"Board"> | string
   ownerId?: Prisma.StringFilter<"Board"> | string
-  content?: Prisma.JsonNullableFilter<"Board">
+  yjsState?: Prisma.BytesNullableFilter<"Board"> | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFilter<"Board"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Board"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -216,7 +220,7 @@ export type BoardOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
-  content?: Prisma.SortOrderInput | Prisma.SortOrder
+  yjsState?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BoardCountOrderByAggregateInput
@@ -231,7 +235,7 @@ export type BoardScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Board"> | string
   title?: Prisma.StringWithAggregatesFilter<"Board"> | string
   ownerId?: Prisma.StringWithAggregatesFilter<"Board"> | string
-  content?: Prisma.JsonNullableWithAggregatesFilter<"Board">
+  yjsState?: Prisma.BytesNullableWithAggregatesFilter<"Board"> | runtime.Bytes | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Board"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Board"> | Date | string
 }
@@ -239,7 +243,7 @@ export type BoardScalarWhereWithAggregatesInput = {
 export type BoardCreateInput = {
   id?: string
   title: string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: runtime.Bytes | null
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBoardsInput
@@ -249,7 +253,7 @@ export type BoardUncheckedCreateInput = {
   id?: string
   title: string
   ownerId: string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: runtime.Bytes | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -257,7 +261,7 @@ export type BoardUncheckedCreateInput = {
 export type BoardUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBoardsNestedInput
@@ -267,7 +271,7 @@ export type BoardUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -276,7 +280,7 @@ export type BoardCreateManyInput = {
   id?: string
   title: string
   ownerId: string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: runtime.Bytes | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -284,7 +288,7 @@ export type BoardCreateManyInput = {
 export type BoardUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -293,7 +297,7 @@ export type BoardUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -312,7 +316,7 @@ export type BoardCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
-  content?: Prisma.SortOrder
+  yjsState?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -321,6 +325,7 @@ export type BoardMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  yjsState?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -329,6 +334,7 @@ export type BoardMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  yjsState?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -375,10 +381,14 @@ export type BoardUncheckedUpdateManyWithoutOwnerNestedInput = {
   deleteMany?: Prisma.BoardScalarWhereInput | Prisma.BoardScalarWhereInput[]
 }
 
+export type NullableBytesFieldUpdateOperationsInput = {
+  set?: runtime.Bytes | null
+}
+
 export type BoardCreateWithoutOwnerInput = {
   id?: string
   title: string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: runtime.Bytes | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -386,7 +396,7 @@ export type BoardCreateWithoutOwnerInput = {
 export type BoardUncheckedCreateWithoutOwnerInput = {
   id?: string
   title: string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: runtime.Bytes | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -424,7 +434,7 @@ export type BoardScalarWhereInput = {
   id?: Prisma.StringFilter<"Board"> | string
   title?: Prisma.StringFilter<"Board"> | string
   ownerId?: Prisma.StringFilter<"Board"> | string
-  content?: Prisma.JsonNullableFilter<"Board">
+  yjsState?: Prisma.BytesNullableFilter<"Board"> | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFilter<"Board"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Board"> | Date | string
 }
@@ -432,7 +442,7 @@ export type BoardScalarWhereInput = {
 export type BoardCreateManyOwnerInput = {
   id?: string
   title: string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: runtime.Bytes | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -440,7 +450,7 @@ export type BoardCreateManyOwnerInput = {
 export type BoardUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -448,7 +458,7 @@ export type BoardUpdateWithoutOwnerInput = {
 export type BoardUncheckedUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -456,7 +466,7 @@ export type BoardUncheckedUpdateWithoutOwnerInput = {
 export type BoardUncheckedUpdateManyWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  yjsState?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -467,7 +477,7 @@ export type BoardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   title?: boolean
   ownerId?: boolean
-  content?: boolean
+  yjsState?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -477,7 +487,7 @@ export type BoardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   title?: boolean
   ownerId?: boolean
-  content?: boolean
+  yjsState?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -487,7 +497,7 @@ export type BoardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   title?: boolean
   ownerId?: boolean
-  content?: boolean
+  yjsState?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -497,12 +507,12 @@ export type BoardSelectScalar = {
   id?: boolean
   title?: boolean
   ownerId?: boolean
-  content?: boolean
+  yjsState?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BoardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "ownerId" | "content" | "createdAt" | "updatedAt", ExtArgs["result"]["board"]>
+export type BoardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "ownerId" | "yjsState" | "createdAt" | "updatedAt", ExtArgs["result"]["board"]>
 export type BoardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -522,7 +532,7 @@ export type $BoardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     title: string
     ownerId: string
-    content: runtime.JsonValue | null
+    yjsState: runtime.Bytes | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["board"]>
@@ -952,7 +962,7 @@ export interface BoardFieldRefs {
   readonly id: Prisma.FieldRef<"Board", 'String'>
   readonly title: Prisma.FieldRef<"Board", 'String'>
   readonly ownerId: Prisma.FieldRef<"Board", 'String'>
-  readonly content: Prisma.FieldRef<"Board", 'Json'>
+  readonly yjsState: Prisma.FieldRef<"Board", 'Bytes'>
   readonly createdAt: Prisma.FieldRef<"Board", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Board", 'DateTime'>
 }

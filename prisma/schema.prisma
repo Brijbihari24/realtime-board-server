@@ -38,7 +38,7 @@ model Board {
   title     String
   ownerId   String
   owner     User     @relation(fields: [ownerId], references: [id])
-  content   Json?
+  yjsState  Bytes?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -32,3 +32,18 @@ export const getAllBoards = async (userId: string) => {
     })
     return (boards)
 }
+
+export const loadBoardState = async (boardId: string) => {
+    const board = await prisma.board.findUnique({
+        where: { id: boardId },
+        select: { yjsState: true }
+    });
+    return board?.yjsState ?? null
+}
+
+export const saveBoardState = async (boardId: string, state: Uint8Array) => {
+    await prisma.board.update({
+        where: { id: boardId },
+        data: { yjsState: Buffer.from(state) }
+    })
+}
